@@ -12,12 +12,12 @@
 
 ;; Requiring features is like loading libraries.
 ;; We need these two in the config:
-(require 'cl)
+(require 'cl-lib)
 (require 'package)
 
 ;; add mirrors for list-packages
 (add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/"))
+             '("melpa" . "http://melpa.org/packages/"))
 
 ;; needed to use things downloaded with the package manager
 (package-initialize)
@@ -32,7 +32,7 @@
                    undo-tree
                    ;; if you want more packages, add them here
                    ))
-       (packages (remove-if 'package-installed-p packages)))
+       (packages (cl-remove-if 'package-installed-p packages)))
   (when packages
     (package-refresh-contents)
     (mapc 'package-install packages)))
@@ -142,8 +142,7 @@ called autosaves located wherever your .emacs.d/ is located.")
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   (quote
-    (undo-tree multiple-cursors leuven-theme monokai-theme ido-vertical-mode auto-complete))))
+   '(undo-tree multiple-cursors leuven-theme monokai-theme ido-vertical-mode auto-complete)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
